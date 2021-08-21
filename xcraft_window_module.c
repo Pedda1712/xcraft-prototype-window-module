@@ -256,9 +256,10 @@ void xg_set_mouse_position (int32_t x, int32_t y){
 	XSelectInput ( dpy, win, ExposureMask | KeyPressMask | KeyReleaseMask | PointerMotionMask | ButtonPressMask | ButtonReleaseMask);
 }
 
-void xg_cursor_visible (bool vis){
+void xg_cursor_set (bool vis, uint8_t shape){
 	if(vis){
-		XUndefineCursor(dpy, win);
+		Cursor _cursor = XCreateFontCursor (dpy, shape);
+		XDefineCursor(dpy, win, _cursor);
 	}else{
 		Pixmap _empty_map;
 		XColor _black;
